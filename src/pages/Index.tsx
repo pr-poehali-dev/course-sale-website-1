@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -6,6 +7,7 @@ import { Badge } from '@/components/ui/badge';
 import Icon from '@/components/ui/icon';
 
 const Index = () => {
+  const navigate = useNavigate();
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [showForm, setShowForm] = useState(false);
@@ -42,7 +44,7 @@ const Index = () => {
     {
       id: 'basic',
       name: 'Базовый',
-      price: '14 990',
+      price: '24 990',
       description: 'Для старта в веб-разработке',
       features: [
         'Доступ к 4 модулям курса',
@@ -57,7 +59,7 @@ const Index = () => {
     {
       id: 'pro',
       name: 'Профессиональный',
-      price: '29 990',
+      price: '39 990',
       description: 'Полное погружение в разработку',
       features: [
         'Доступ ко всем 8 модулям',
@@ -74,7 +76,7 @@ const Index = () => {
     {
       id: 'premium',
       name: 'Премиум',
-      price: '49 990',
+      price: '59 990',
       description: 'Максимальный результат',
       features: [
         'Все из тарифа Pro',
@@ -178,19 +180,19 @@ const Index = () => {
               <Button 
                 size="lg" 
                 className="bg-gradient-primary hover:opacity-90 transition-all text-white font-semibold px-8 py-6 text-lg rounded-xl shadow-xl hover:shadow-2xl hover:scale-105"
-                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => navigate('/course')}
               >
                 <Icon name="Rocket" className="mr-2" size={20} />
-                Выбрать тариф
+                Начать обучение
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
                 className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50 font-semibold px-8 py-6 text-lg rounded-xl"
-                onClick={() => document.getElementById('program')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
               >
-                <Icon name="BookOpen" className="mr-2" size={20} />
-                Программа курса
+                <Icon name="DollarSign" className="mr-2" size={20} />
+                Тарифы и цены
               </Button>
             </div>
             
