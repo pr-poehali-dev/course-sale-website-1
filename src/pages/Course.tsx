@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
@@ -7,6 +8,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import Icon from '@/components/ui/icon';
 
 const Course = () => {
+  const navigate = useNavigate();
   const [completedLessons, setCompletedLessons] = useState<number[]>([]);
   const [currentLesson, setCurrentLesson] = useState(0);
 
@@ -249,14 +251,34 @@ const Course = () => {
       <div className="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-8">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="font-heading text-3xl font-bold mb-2">Веб-разработка с нуля</h1>
-              <p className="text-white/90">Ваш прогресс: {completedLessons.length} из {totalLessons} уроков</p>
+            <div className="flex items-center gap-4">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="text-white hover:bg-white/20"
+                onClick={() => navigate('/dashboard')}
+              >
+                <Icon name="ArrowLeft" size={24} />
+              </Button>
+              <div>
+                <h1 className="font-heading text-3xl font-bold mb-2">Веб-разработка с нуля</h1>
+                <p className="text-white/90">Ваш прогресс: {completedLessons.length} из {totalLessons} уроков</p>
+              </div>
             </div>
-            <Button variant="secondary" size="lg">
-              <Icon name="Award" className="mr-2" size={20} />
-              Получить сертификат
-            </Button>
+            <div className="flex gap-3">
+              <Button 
+                variant="secondary" 
+                size="lg"
+                onClick={() => navigate('/dashboard')}
+              >
+                <Icon name="LayoutDashboard" className="mr-2" size={20} />
+                Дашборд
+              </Button>
+              <Button variant="secondary" size="lg">
+                <Icon name="Award" className="mr-2" size={20} />
+                Сертификат
+              </Button>
+            </div>
           </div>
           <Progress value={progress} className="mt-4 h-3" />
         </div>
