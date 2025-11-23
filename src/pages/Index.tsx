@@ -331,6 +331,146 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-gradient-secondary text-white border-0">FAQ</Badge>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Частые вопросы</h2>
+            <p className="text-xl text-gray-600">Ответы на популярные вопросы о курсе</p>
+          </div>
+
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="space-y-4">
+              <AccordionItem value="faq-1" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="HelpCircle" className="text-purple-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Подойдет ли мне курс, если я совсем новичок?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Да, курс специально разработан для начинающих. Мы начинаем с самых основ: что такое HTML, CSS, как работает интернет. 
+                    Не требуется никаких предварительных знаний в программировании. Главное — желание учиться и время на практику (10-15 часов в неделю).
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-2" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="Clock" className="text-blue-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Сколько времени нужно уделять обучению?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Рекомендуем выделять 10-15 часов в неделю: 5-7 часов на просмотр видеоуроков и 5-8 часов на практические задания. 
+                    Курс длится 5 месяцев при таком темпе. Если у вас больше времени, можете проходить быстрее. 
+                    Доступ к материалам остается навсегда, так что можете учиться в своем ритме.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-3" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="Laptop" className="text-pink-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Какой компьютер нужен для обучения?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Подойдет любой современный компьютер или ноутбук (Windows, Mac или Linux). Минимальные требования: 4 ГБ RAM, 
+                    процессор Intel i3 или аналог, 20 ГБ свободного места на диске. Все инструменты, которые мы используем — бесплатные. 
+                    Подробная инструкция по установке предоставляется в первом модуле.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-4" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="Briefcase" className="text-orange-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Помогаете ли вы с трудоустройством?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Да! В тарифах Pro и Премиум включена помощь с трудоустройством: подготовка резюме и портфолио, 
+                    mock-интервью, доступ к закрытым вакансиям партнеров. 85% наших выпускников находят работу в течение 3 месяцев после окончания. 
+                    В тарифе Премиум мы даём гарантию трудоустройства или возврат денег.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-5" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="CreditCard" className="text-green-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Можно ли оплатить в рассрочку?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Да, мы предоставляем рассрочку на 12 месяцев без процентов и переплат. Например, тариф Профессиональный 
+                    обойдётся всего в 3 333 ₽/месяц. Оформление рассрочки занимает 5 минут онлайн, одобрение моментальное. 
+                    Также принимаем оплату картой, СБП и от юридических лиц.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-6" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="Users" className="text-purple-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Как проходит обратная связь и поддержка?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Каждое домашнее задание проверяется наставником с подробными комментариями. Ответы на вопросы в чате сообщества — 
+                    в течение 2 часов в рабочее время. В тарифах Pro и Премиум доступны еженедельные групповые созвоны с преподавателем. 
+                    В Премиуме — ещё и индивидуальные 1-на-1 сессии каждые 2 недели.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-7" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="Award" className="text-blue-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Получу ли я сертификат?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Да, после успешного завершения курса и защиты финального проекта вы получите именной сертификат. 
+                    Сертификат подтверждает, что вы прошли программу обучения и владеете навыками веб-разработки. 
+                    Он будет полезен при поиске работы и пополнении портфолио.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+
+              <AccordionItem value="faq-8" className="border-2 border-gray-200 rounded-xl bg-white shadow-sm hover:shadow-md transition-all">
+                <AccordionTrigger className="px-6 py-4 hover:no-underline">
+                  <div className="flex items-center gap-3 text-left">
+                    <Icon name="RefreshCw" className="text-pink-600 flex-shrink-0" size={24} />
+                    <span className="font-semibold text-lg">Можно ли вернуть деньги, если не подойдёт?</span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="px-6 pb-4">
+                  <p className="text-gray-700 leading-relaxed pl-9">
+                    Да, первые 14 дней — пробный период. Если поймёте, что курс вам не подходит, мы вернём 100% оплаты без лишних вопросов. 
+                    Это наш способ показать уверенность в качестве обучения. Просто напишите в поддержку, и мы оформим возврат в течение 3 рабочих дней.
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </div>
+        </div>
+      </section>
+
       <section id="pricing" className="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
