@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
@@ -7,6 +7,36 @@ import Icon from '@/components/ui/icon';
 
 const Index = () => {
   const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+  const [showForm, setShowForm] = useState(false);
+  const [formData, setFormData] = useState({ name: '', email: '', phone: '', plan: '' });
+
+  useEffect(() => {
+    const targetDate = new Date('2024-12-15T00:00:00').getTime();
+    
+    const timer = setInterval(() => {
+      const now = new Date().getTime();
+      const difference = targetDate - now;
+      
+      if (difference > 0) {
+        setTimeLeft({
+          days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+          hours: Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)),
+          minutes: Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60)),
+          seconds: Math.floor((difference % (1000 * 60)) / 1000)
+        });
+      }
+    }, 1000);
+    
+    return () => clearInterval(timer);
+  }, []);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(`Спасибо, ${formData.name}! Мы свяжемся с вами в ближайшее время.`);
+    setShowForm(false);
+    setFormData({ name: '', email: '', phone: '', plan: '' });
+  };
 
   const pricingPlans = [
     {
@@ -57,6 +87,30 @@ const Index = () => {
       ],
       gradient: 'from-pink-500 to-orange-500',
       popular: false
+    }
+  ];
+
+  const testimonials = [
+    {
+      name: 'Александр Петров',
+      role: 'Junior Frontend Developer в Яндекс',
+      avatar: '👨‍💻',
+      text: 'Прошел курс 6 месяцев назад, сейчас работаю в Яндексе. Программа очень структурированная, наставники всегда помогали. Особенно понравились реальные проекты в портфолио.',
+      rating: 5
+    },
+    {
+      name: 'Мария Соколова',
+      role: 'Fullstack Developer в Сбер',
+      avatar: '👩‍💻',
+      text: 'До курса работала в продажах. Благодаря менторам и поддержке смогла переквалифицироваться. Через 3 месяца после выпуска получила оффер. Лучшая инвестиция в себя!',
+      rating: 5
+    },
+    {
+      name: 'Дмитрий Козлов',
+      role: 'React Developer в стартапе',
+      avatar: '🧑‍💻',
+      text: 'Курс превзошел ожидания. Много практики, актуальный стек технологий. Код-ревью от опытных разработчиков — это просто золото. Рекомендую всем, кто хочет войти в IT.',
+      rating: 5
     }
   ];
 
@@ -204,6 +258,77 @@ const Index = () => {
         </div>
       </section>
 
+      <section className="py-20 bg-gradient-to-br from-purple-900 to-blue-900 text-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center">
+            <Badge className="mb-4 bg-white/20 text-white border-0">⏰ Успей записаться</Badge>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold mb-6">До старта курса осталось:</h2>
+            
+            <div className="grid grid-cols-4 gap-4 max-w-2xl mx-auto mb-8">
+              {[
+                { value: timeLeft.days, label: 'дней' },
+                { value: timeLeft.hours, label: 'часов' },
+                { value: timeLeft.minutes, label: 'минут' },
+                { value: timeLeft.seconds, label: 'секунд' }
+              ].map((item, idx) => (
+                <div key={idx} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                  <div className="font-heading text-4xl md:text-5xl font-black mb-2">
+                    {String(item.value).padStart(2, '0')}
+                  </div>
+                  <div className="text-sm text-white/80">{item.label}</div>
+                </div>
+              ))}
+            </div>
+            
+            <p className="text-xl mb-6 text-white/90">Количество мест ограничено — осталось 12 из 30</p>
+            <Button 
+              size="lg" 
+              className="bg-white text-purple-900 hover:bg-gray-100 font-bold px-8 py-6 text-lg rounded-xl shadow-xl"
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              <Icon name="Zap" className="mr-2" size={20} />
+              Забронировать место
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <Badge className="mb-4 bg-gradient-primary text-white border-0">Отзывы</Badge>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold mb-4">Что говорят наши выпускники</h2>
+            <p className="text-xl text-gray-600">Истории успеха реальных студентов</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+            {testimonials.map((testimonial, idx) => (
+              <Card key={idx} className="border-2 hover:shadow-xl transition-all duration-300 hover:scale-105">
+                <CardHeader>
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-16 h-16 rounded-full bg-gradient-primary flex items-center justify-center text-3xl">
+                      {testimonial.avatar}
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg">{testimonial.name}</CardTitle>
+                      <CardDescription className="text-sm">{testimonial.role}</CardDescription>
+                    </div>
+                  </div>
+                  <div className="flex gap-1">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Icon key={i} name="Star" className="text-yellow-400 fill-yellow-400" size={16} />
+                    ))}
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-700 leading-relaxed">{testimonial.text}</p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section id="pricing" className="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -259,6 +384,10 @@ const Index = () => {
                         ? 'bg-gradient-primary hover:opacity-90 text-white shadow-lg' 
                         : 'bg-gray-900 hover:bg-gray-800 text-white'
                     }`}
+                    onClick={() => {
+                      setFormData({ ...formData, plan: plan.name });
+                      setShowForm(true);
+                    }}
                   >
                     <Icon name="ShoppingCart" className="mr-2" size={18} />
                     Записаться на курс
@@ -270,7 +399,12 @@ const Index = () => {
 
           <div className="text-center mt-12">
             <p className="text-gray-600 mb-4">Не уверены в выборе?</p>
-            <Button variant="outline" size="lg" className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-2 border-purple-600 text-purple-600 hover:bg-purple-50"
+              onClick={() => setShowForm(true)}
+            >
               <Icon name="MessageCircle" className="mr-2" size={18} />
               Получить консультацию
             </Button>
@@ -278,13 +412,99 @@ const Index = () => {
         </div>
       </section>
 
+      {showForm && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
+          <Card className="w-full max-w-md animate-scale-in">
+            <CardHeader>
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle className="font-heading text-2xl">Записаться на курс</CardTitle>
+                  <CardDescription>Заполните форму и мы свяжемся с вами</CardDescription>
+                </div>
+                <Button 
+                  variant="ghost" 
+                  size="icon"
+                  onClick={() => setShowForm(false)}
+                >
+                  <Icon name="X" size={20} />
+                </Button>
+              </div>
+            </CardHeader>
+            <form onSubmit={handleSubmit}>
+              <CardContent className="space-y-4">
+                <div>
+                  <label className="block text-sm font-medium mb-2">Ваше имя *</label>
+                  <input
+                    type="text"
+                    required
+                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition-colors"
+                    placeholder="Иван Иванов"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Email *</label>
+                  <input
+                    type="email"
+                    required
+                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition-colors"
+                    placeholder="ivan@example.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-2">Телефон *</label>
+                  <input
+                    type="tel"
+                    required
+                    className="w-full px-4 py-3 rounded-lg border-2 border-gray-200 focus:border-purple-500 focus:outline-none transition-colors"
+                    placeholder="+7 (999) 123-45-67"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
+                {formData.plan && (
+                  <div className="bg-purple-50 p-4 rounded-lg">
+                    <p className="text-sm font-medium">Выбранный тариф:</p>
+                    <p className="text-lg font-bold text-purple-600">{formData.plan}</p>
+                  </div>
+                )}
+              </CardContent>
+              <CardFooter className="flex gap-3">
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  className="flex-1"
+                  onClick={() => setShowForm(false)}
+                >
+                  Отмена
+                </Button>
+                <Button 
+                  type="submit" 
+                  className="flex-1 bg-gradient-primary text-white"
+                >
+                  <Icon name="Send" className="mr-2" size={16} />
+                  Отправить
+                </Button>
+              </CardFooter>
+            </form>
+          </Card>
+        </div>
+      )}
+
       <footer className="bg-gray-900 text-white py-12">
         <div className="container mx-auto px-4 text-center">
           <div className="mb-6">
             <h3 className="font-heading text-2xl font-bold mb-2">Готов начать свой путь в IT?</h3>
             <p className="text-gray-400">Присоединяйся к новому потоку и получи бесплатный вводный урок</p>
           </div>
-          <Button size="lg" className="bg-gradient-primary hover:opacity-90 text-white px-8 py-6 rounded-xl shadow-xl">
+          <Button 
+            size="lg" 
+            className="bg-gradient-primary hover:opacity-90 text-white px-8 py-6 rounded-xl shadow-xl"
+            onClick={() => setShowForm(true)}
+          >
             <Icon name="Rocket" className="mr-2" size={20} />
             Начать бесплатно
           </Button>
